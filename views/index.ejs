@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Luv Connection</title>
+	<link rel="stylesheet" href="/board_style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid luvBackground">
+		<div class="row header">
+			<div class="col-md-1"></div>
+			<div class="col-md-6"><h1>The Luv Connection</h1></div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-6 messageInputBox">
+				<form role="form" action="/message" method="post">
+					<div class="form-group">
+						<label for="name">Safe Word:</label>
+						<input type="text" name="name" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="message">Luv Message:</label>
+						<input type="text" name="message" class="form-control">
+					</div>
+					<button class="btn btn-primary">Add Message!</button>
+					<h4 class="errors"><%= messageError %></h4>
+				</form>
+			</div>
+		</div>
+		<% for(idx in messages) { %>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 messageInputBox">
+					<h2><span>Safe Word:</span> <%= messages[idx].name %></h2>
+					<h3 class="messageBottom"><span>Luv Message:</span> <%= messages[idx].message %></h3>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-6">
+							<% for(i=0; i<messages[idx].comments.length;i++) { %>
+									<div class="commentBox">
+										<h3><span>Name:</span> <%= messages[idx].comments[i].name %></h3>
+										<h4><span>Comment:</span> <%= messages[idx].comments[i].comment %></h4>
+									</div>
+							<% } %>
+							<form role="form" action="/comment" method="post">
+								<div class="form-group">
+									<input type="hidden" name="id" value="<%= messages[idx]._id %>">
+									<label for="name">Name:</label>
+									<input type="text" name="name" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="comment">Luv Comment:</label>
+									<input type="text" name="comment" class="form-control">
+								</div>
+								<button class="btn btn-primary">Add Comment!</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% } %>
+	</div>
+</body>
+</html>

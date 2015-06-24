@@ -1,0 +1,11 @@
+{
+	"name": "basic_mongoose_app",
+	"dependencies": {
+		"body-parser": "latest",
+	    "ejs": "latest",
+	    "express": "latest",
+	    "mongoose": "latest",
+	    "mongoose-validator": "latest",
+	    "path": "latest"
+	}
+}
